@@ -44,14 +44,28 @@ export function addtocart(productId) {
 
 export function removeFromCart(productId) {
   const newCart = [];
-
+  
   cart.forEach(cartItem => {
     if (cartItem.productId !== productId){
       newCart.push(cartItem)
     }
-
+    
     cart = newCart;
   });
+  
+  saveToStorage();
+}
 
+ export function updateDeliveryOption(productId, deliveryOptionId) {
+  let matchingItem;
+  
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId){
+      matchingItem = cartItem;
+    }
+  });
+  
+  matchingItem.deliveryOptionsId = deliveryOptionId;
+  
   saveToStorage();
 }
